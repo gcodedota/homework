@@ -6,12 +6,14 @@
 
 CREATE TABLE IF NOT EXISTS ids (
   id bigserial PRIMARY KEY,
-  idx bytea UNIQUE NOT NULL,
+  idx bytea NOT NULL,
   remainder bytea NOT NULL,
   type smallint NOT NULL
 );
 
 COMMENT ON COLUMN ids.type IS '0=eoa 1=contract 2=txhash 3=blockhash';
+
+CREATE INDEX ids_idx_index ON ids (idx);
 
 -- nicks:
 -- id: bigint # foreign key id@ids
@@ -47,7 +49,7 @@ CREATE TABLE IF NOT EXISTS erc20tokens (
 -- created_at: int # unix ts
 
 CREATE TABLE IF NOT EXISTS blocks (  
-  height int PRIMARY KEY,
+  height int UNIQUE,
   id bigint NOT NULL,
   created_at int NOT NULL,
   FOREIGN KEY (id) REFERENCES ids(id)
