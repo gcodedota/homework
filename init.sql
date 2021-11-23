@@ -26,3 +26,19 @@ CREATE TABLE IF NOT EXISTS nicks (
   type smallint NOT NULL,
   FOREIGN KEY (id) REFERENCES ids(id)
 );
+
+-- erc20tokens:
+-- id: bigint # foreign key id@ids
+-- name: string # token name
+-- symbol: string # token symbol
+-- decimals: smallint # how many decimals the token has
+-- supply: bigint # divided by decimals
+
+CREATE TABLE IF NOT EXISTS erc20tokens (  
+  id bigint NOT NULL,
+  name varchar(200) NOT NULL,
+  symbol varchar(7) NOT NULL,
+  decimals smallint NOT NULL,
+  supply bigint NOT NULL,
+  FOREIGN KEY (id) REFERENCES ids(id)
+);
