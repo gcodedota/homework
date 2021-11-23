@@ -42,3 +42,15 @@ CREATE TABLE IF NOT EXISTS erc20tokens (
   supply bigint NOT NULL,
   FOREIGN KEY (id) REFERENCES ids(id)
 );
+
+-- blocks:
+-- id: bigint # foreign key id@ids, the blockhash
+-- height: int # block height in the chain
+-- created_at: int # unix ts
+
+CREATE TABLE IF NOT EXISTS blocks (  
+  height int UNIQUE,
+  id bigint NOT NULL,
+  created_at int NOT NULL,
+  FOREIGN KEY (id) REFERENCES ids(id)
+);
