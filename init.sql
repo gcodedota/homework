@@ -81,3 +81,19 @@ CREATE TABLE IF NOT EXISTS txs (
   FOREIGN KEY (from_id) REFERENCES ids(id),
   FOREIGN KEY (to_id) REFERENCES ids(id)
 );
+
+-- ethtxs: # if data == 0x tx gets inserted
+-- txhash: bigint # foreign key id@ids
+-- from_id: bigint # foreign key id@ids
+-- to_id: bigint # foreign key id@ids
+-- value: bigint # in gwei
+
+CREATE TABLE IF NOT EXISTS ethtxs (  
+  txhash bigint NOT NULL,
+  from_id bigint NOT NULL,
+  to_id bigint NOT NULL,
+  value bigint NOT NULL,
+  FOREIGN KEY (txhash) REFERENCES ids(id),
+  FOREIGN KEY (from_id) REFERENCES ids(id),
+  FOREIGN KEY (to_id) REFERENCES ids(id)
+);
