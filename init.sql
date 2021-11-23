@@ -132,3 +132,24 @@ CREATE TABLE IF NOT EXISTS contracts (
   FOREIGN KEY (address_id) REFERENCES ids(id),
   FOREIGN KEY (deployer_id) REFERENCES ids(id)
 );
+
+-- stats:
+-- address_id: bigint # foreign key id@ids
+-- token_id: bigint # foreign key id@ids, or 0 for eth transfers
+-- balance: bigint # divided by decimals / gwei
+-- first_in: int # unix ts
+-- first_out: int # unix ts
+-- last_in: int # unix ts
+-- last_out: int # unix ts
+
+CREATE TABLE IF NOT EXISTS stats (  
+  address_id bigint NOT NULL,
+  token_id bigint NOT NULL,
+  balance bigint NOT NULL,
+  first_in int NOT NULL,
+  first_out int NOT NULL,
+  last_in int NOT NULL,
+  last_out int NOT NULL,
+  FOREIGN KEY (address_id) REFERENCES ids(id),
+  FOREIGN KEY (token_id) REFERENCES ids(id)
+);
