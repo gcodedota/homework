@@ -116,3 +116,19 @@ CREATE TABLE IF NOT EXISTS erc20txs (
   FOREIGN KEY (from_id) REFERENCES ids(id),
   FOREIGN KEY (to_id) REFERENCES ids(id)
 );
+
+-- contracts:
+-- txhash: bigint # foreign key id@ids
+-- address_id: bigint # contract address, foreign key id@ids
+-- deployer_id: bigint # deployer address, foreign key id@ids
+-- bytecode: bytea # contract bytecode
+
+CREATE TABLE IF NOT EXISTS contracts (  
+  txhash bigint NOT NULL,
+  address_id bigint NOT NULL,
+  deployer_id bigint NOT NULL,
+  bytecode bytea NOT NULL,
+  FOREIGN KEY (txhash) REFERENCES ids(id),
+  FOREIGN KEY (address_id) REFERENCES ids(id),
+  FOREIGN KEY (deployer_id) REFERENCES ids(id)
+);
