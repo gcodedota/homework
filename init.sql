@@ -97,3 +97,22 @@ CREATE TABLE IF NOT EXISTS ethtxs (
   FOREIGN KEY (from_id) REFERENCES ids(id),
   FOREIGN KEY (to_id) REFERENCES ids(id)
 );
+
+-- erc20txs: # if first four bytes indicate transfer signature tx gets inserted
+-- txhash: bigint # foreign key id@ids
+-- token_id: bigint # foreign key id@ids
+-- from_id: bigint # foreign key id@ids
+-- to_id: bigint # foreign key id@ids
+-- value: bigint # divided by decimals
+
+CREATE TABLE IF NOT EXISTS erc20txs (  
+  txhash bigint NOT NULL,
+  token_id bigint NOT NULL,
+  from_id bigint NOT NULL,
+  to_id bigint NOT NULL,
+  value bigint NOT NULL,
+  FOREIGN KEY (txhash) REFERENCES ids(id),
+  FOREIGN KEY (token_id) REFERENCES ids(id),
+  FOREIGN KEY (from_id) REFERENCES ids(id),
+  FOREIGN KEY (to_id) REFERENCES ids(id)
+);
