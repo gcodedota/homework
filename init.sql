@@ -54,3 +54,30 @@ CREATE TABLE IF NOT EXISTS blocks (
   created_at int NOT NULL,
   FOREIGN KEY (id) REFERENCES ids(id)
 );
+
+-- txs:
+-- txhash: bigint # foreign key id@ids, the txhash
+-- block: int # block height, foreign key height@blocks
+-- value: bigint # in gwei
+-- from_id: bigint # foreign key id@ids
+-- to_id: bigint # foreign key id@ids
+-- gas_limit: bigint
+-- gas_price: bigint
+-- method_id: int? # 4 bytes
+-- params: bytea? # not contract deployment, not erc20 tx
+
+CREATE TABLE IF NOT EXISTS txs (  
+  txhash bigint NOT NULL,
+  block int NOT NULL,
+  value bigint NOT NULL,
+  from_id bigint NOT NULL,
+  to_id bigint NOT NULL,
+  gas_limit bigint NOT NULL,
+  gas_price bigint NOT NULL,
+  method_id int,
+  params bytea,
+  FOREIGN KEY (txhash) REFERENCES ids(id),
+  FOREIGN KEY (block) REFERENCES blocks(height),
+  FOREIGN KEY (from_id) REFERENCES ids(id),
+  FOREIGN KEY (to_id) REFERENCES ids(id)
+);
